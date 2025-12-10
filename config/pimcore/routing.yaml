@@ -1,0 +1,5 @@
+pimcore_plugin_admin_toolbar_extension:
+    resource: "@PimcorePluginAdminToolbarExtensionBundle/src/Controller/"
+    type:     annotation
+    prefix:   /
+

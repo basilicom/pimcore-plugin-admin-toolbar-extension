@@ -1,0 +1,25 @@
+{
+    "name": "basilicom/pimcore-plugin-admin-toolbar-extension",
+    "description": "This plugin allows you to integrate your own menu items into the backend. The target urls can be opened in the iframe panel within the Pimcore admin interface or in a new window.",
+    "type": "pimcore-bundle",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Marco Senkpiel",
+            "email": "marco.senkpiel@basilicom.de",
+            "homepage": "https://www.basilicom.de",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Basilicom\\ToolbarExtension\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.0",
+        "pimcore/pimcore": "^10.0 || ^11.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": false
+}

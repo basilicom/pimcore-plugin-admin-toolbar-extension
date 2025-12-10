@@ -1,0 +1,1 @@
+# pimcore-plugin-admin-toolbar-extension

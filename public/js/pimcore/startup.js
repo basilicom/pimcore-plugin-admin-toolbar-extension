@@ -8,26 +8,29 @@ pimcore.plugin.BasilicomServicesDashboards = Class.create({
 
     preMenuBuild: function (e) {
         let pimcoreMenu = e.detail.menu;
-
-        const user = pimcore.globalmanager.get('user');
         const perspectiveCfg = pimcore.globalmanager.get("perspective");
-
         const config = pimcore.basilicomToolbarExtensionConfig;
 
         if (Object.keys(config.main_toolbar).length > 0) {
             this.attachToToolbar(pimcoreMenu, config);
         }
 
-        if (Object.keys(config.extras_menu).length > 0) {
-            this.attachToExistingNode(pimcoreMenu.extras, config.extras_menu);
+        if (pimcoreMenu.extras && perspectiveCfg.inToolbar("extras")) {
+            if (Object.keys(config.extras_menu).length > 0) {
+                this.attachToExistingNode(pimcoreMenu.extras, config.extras_menu);
+            }
         }
 
-        if (Object.keys(config.settings_menu).length > 0) {
-            this.attachToExistingNode(pimcoreMenu.settings, config.settings_menu);
+        if (pimcoreMenu.settings && perspectiveCfg.inToolbar("settings")) {
+            if (Object.keys(config.settings_menu).length > 0) {
+                this.attachToExistingNode(pimcoreMenu.settings, config.settings_menu);
+            }
         }
 
-        if (Object.keys(config.file_menu).length > 0) {
-            this.attachToExistingNode(pimcoreMenu.file, config.file_menu);
+        if (pimcoreMenu.file && perspectiveCfg.inToolbar("file")) {
+            if (Object.keys(config.file_menu).length > 0) {
+                this.attachToExistingNode(pimcoreMenu.file, config.file_menu);
+            }
         }
     },
 
@@ -67,7 +70,7 @@ pimcore.plugin.BasilicomServicesDashboards = Class.create({
         }
     },
 
-    processNestedMenuItems: function (menu) {
+    processNestedMenuItems: function (menu, depth = 0) {
         let items = [];
         if (menu.length !== 0) {
 
@@ -79,14 +82,14 @@ pimcore.plugin.BasilicomServicesDashboards = Class.create({
                     subMenu = {
                         cls: "pimcore_navigation_flyout",
                         shadow: false,
-                        items: this.processNestedMenuItems(currentNavItem.menu)
+                        items: this.processNestedMenuItems(currentNavItem.menu, depth + 1)
                     }
                 }
 
                 items.push({
                     text: currentNavItem.label,
                     iconCls: currentNavItem.iconCls,
-                    itemId: 'basilicom-services-dashboards-sub-menu-item-' + currentNavKey,
+                    itemId: 'basilicom_navigation_extension_' + depth + '_' + currentNavKey,
                     handlerData: Ext.apply({}, currentNavItem, {
                         key: currentNavKey
                     }),

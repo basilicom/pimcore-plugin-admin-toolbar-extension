@@ -9,7 +9,7 @@ class ConfigReaderService
     private array $config;
 
     public function __construct(
-        array                               $config,
+        array                                $config,
         private readonly SerializerInterface $serializer
     )
     {
@@ -26,18 +26,32 @@ class ConfigReaderService
         return $this->serializer->serialize($this->getPreparedConfig(), 'json');
     }
 
+    public function getCustomCss(): string
+    {
+        if ($this->config['custom_css']) {
+            return sprintf(
+                '@import "%s";',
+                $this->config['custom_css']
+            );
+        }
+
+        return '';
+    }
+
     private function getPreparedConfig(): array
     {
-        $config= [];
+        $config = [];
         foreach ($this->config as $navEntryPoint => $menuItem) {
-            $config[$navEntryPoint] = $this->prepareMenuItem($menuItem);
+            if ($navEntryPoint !== 'custom_css') {
+                $config[$navEntryPoint] = $this->prepareMenuItem($menuItem);
+            }
         }
         return $config;
     }
 
     private function prepareMenuItem(array $menuItem): array
     {
-        if(array_key_exists('menu', $menuItem) && count($menuItem['menu']) > 0) {
+        if (array_key_exists('menu', $menuItem) && count($menuItem['menu']) > 0) {
             foreach ($menuItem['menu'] as $key => $subMenuItem) {
                 $menuItem['menu'][$key] = $this->prepareMenuItem($subMenuItem);
             }

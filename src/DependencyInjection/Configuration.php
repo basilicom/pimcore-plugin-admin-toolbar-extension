@@ -12,15 +12,21 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('pimcore_plugin_admin_toolbar_extension');
         $rootNode = $treeBuilder->getRootNode();
+        $children = $rootNode->children();
+
+        $children
+            ->scalarNode('custom_css')
+                ->info('add custom css file e.g. /build/static/css/custom.css')
+                ->defaultValue(null)
+            ->end()
+        ->end();
 
         $allowedKeys = [
-            'main_toolbar' => 'Konfiguration für Einträge in der Haupt-Toolbar.',
-            'extras_menu' => 'Konfiguration für Einträge im Extras-Menü.',
-            'settings_menu' => 'Konfiguration für Einträge im Tools-Menü.',
-            'file_menu' => 'Konfiguration für Einträge im Marketing-Menü.',
+            'main_toolbar' => 'main toolbar configuration',
+            'file_menu' => 'file menu configuration',
+            'extras_menu' => 'extras menu configuration',
+            'settings_menu' => 'tools menu configuration',
         ];
-
-        $children = $rootNode->children();
 
         foreach ($allowedKeys as $key => $info) {
             $this->addConfigGroupNode($children, $key, $info);
@@ -29,9 +35,6 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    /**
-     * Fügt einen Array-Knoten der obersten Ebene (z.B. main_toolbar) hinzu.
-     */
     private function addConfigGroupNode(NodeBuilder $nodeBuilder, string $key, string $info): void
     {
         $nodeBuilder

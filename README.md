@@ -40,6 +40,7 @@ bin/console assets:install --symlink --relative
 
 ```yaml
 pimcore_plugin_admin_toolbar_extension:
+    custom_css: ''
     main_toolbar:
         infos:
             label: Information
@@ -71,7 +72,7 @@ pimcore_plugin_admin_toolbar_extension:
                     label: Supervisor
                     url: '/admin/basilicom-toolbar-extension/demo' #required
         elastic:
-            label: Elastig Search
+            label: Elastic Search
             iconCls: 'pimcore_nav_icon_search'
             url: '/admin/basilicom-toolbar-extension/demo' #required
 

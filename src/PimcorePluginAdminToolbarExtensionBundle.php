@@ -24,7 +24,7 @@ class PimcorePluginAdminToolbarExtensionBundle extends AbstractPimcoreBundle imp
     public function getJsPaths(): array
     {
         return [
-            '/admin/basilicom-toolbar-extension/js/pimcore/config',
+            '/admin/basilicom-toolbar-extension/js/pimcore/config.js',
             '/bundles/pimcorepluginadmintoolbarextension/js/pimcore/startup.js'
         ];
     }
@@ -35,7 +35,7 @@ class PimcorePluginAdminToolbarExtensionBundle extends AbstractPimcoreBundle imp
     public function getCssPaths(): array
     {
         return [
-            '/bundles/pimcorepluginadmintoolbarextension/css/pimcore/admin.css'
+            '/admin/basilicom-toolbar-extension/css/pimcore/custom_css.css'
         ];
     }
 }

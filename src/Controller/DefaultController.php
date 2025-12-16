@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DefaultController extends FrontendController
 {
     /**
-     * @Route("/admin/basilicom-toolbar-extension/js/pimcore/config")
+     * @Route("/admin/basilicom-toolbar-extension/js/pimcore/config.js")
      */
     public function jsConfig(ConfigReaderService $config): Response
     {
@@ -21,6 +21,17 @@ class DefaultController extends FrontendController
             ),
             Response::HTTP_OK,
             ['Content-Type' => 'application/javascript']
+        );
+    }
+
+    /**
+     * @Route("/admin/basilicom-toolbar-extension/css/pimcore/custom_css.css")
+     */
+    public function customCss(ConfigReaderService $config): Response
+    {
+        return new Response($config->getCustomCss(),
+            Response::HTTP_OK,
+            ['Content-Type' => 'text/css']
         );
     }
 

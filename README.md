@@ -9,7 +9,7 @@ You can add Items to the main tollbar adn to existing main toolbar items (file, 
 
 | Bundle Version | PHP  | Pimcore |
 |----------------|------|---------|
-| 1.0            | ^8.3 | ^11.0   |
+| 1.0.1          | ^8.3 | ^11.0   |
 
 ## Installation
 
@@ -40,7 +40,7 @@ bin/console assets:install --symlink --relative
 
 ```yaml
 pimcore_plugin_admin_toolbar_extension:
-    custom_css: ''
+    custom_css: '/build/static/custom_icons.css'
     main_toolbar:
         infos:
             label: Information
@@ -58,6 +58,7 @@ pimcore_plugin_admin_toolbar_extension:
                             url: '/admin/basilicom-toolbar-extension/demo'
         docs:
             label: Search Google
+            iconCls: 'pimcore_icon_operator_boolean'
             url: 'https://google.com'
             new_window: true
 
@@ -67,24 +68,25 @@ pimcore_plugin_admin_toolbar_extension:
             menu:
                 monit:
                     label: Monit
-                    url: '/admin/basilicom-toolbar-extension/demo' #required
+                    url: '/admin/basilicom-toolbar-extension/demo'
                 supervisor:
                     label: Supervisor
-                    url: '/admin/basilicom-toolbar-extension/demo' #required
+                    url: '/admin/basilicom-toolbar-extension/demo'
         elastic:
             label: Elastic Search
             iconCls: 'pimcore_nav_icon_search'
-            url: '/admin/basilicom-toolbar-extension/demo' #required
+            url: '/admin/basilicom-toolbar-extension/demo'
 
     settings_menu:
         some_settings_entry:
             label: Settings Entry
-            url: '/admin/basilicom-toolbar-extension/demo' #required
+            url: '/admin/basilicom-toolbar-extension/demo'
 
     file_menu:
         some_file_entry:
             label: File Entry
-            url: '/admin/basilicom-toolbar-extension/demo' #required
+            iconCls: 'pimcore_icon_operator_boolean'
+            url: '/admin/basilicom-toolbar-extension/demo'
 
 ```
 
